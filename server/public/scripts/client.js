@@ -80,11 +80,6 @@ function getTasks(){
   });
 } // end getTasks
 
-// // function saveKoala( newKoala ){
-// //   console.log( 'In saveKoala, newKoala is:', newKoala );
-// //   // ajax call to server to get koalas
- 
-// // }
 
 // ⬇ Function to complete task
 function completedTask() {
@@ -114,7 +109,7 @@ function removeItem() {
   let initTask = $(this).closest('li').text();
   let taskToRemove = initTask.replace('Remove', '');
   console.log('item is being removed', idToRemove);
-  swal({
+  sweetAlert({
     title: "Do you want to remove this task?",
     text: `${taskToRemove}`,
   })
@@ -128,10 +123,11 @@ function removeItem() {
 }
 // ⬇ Function to delete from Database
 
-function fullyDelete(idToDelete) {
+function fullyDelete(deleteId) {
+
   $.ajax({
     method: 'DELETE',
-    url: `/tasks/${idToDelete}`,
+    url: `/tasks/${deleteId}`,
   }).then((response) => {
     console.log('task removed', response);
     getTasks();
@@ -140,3 +136,4 @@ function fullyDelete(idToDelete) {
     alert('Unfortunately this item was not deleted, please try again.');
   })
 }
+//#end region ⬆⬆ All functions above. 

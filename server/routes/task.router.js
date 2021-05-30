@@ -2,24 +2,20 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-
-
-
 // DB CONNECTION
 
-
-// //! GET
-// router.get('/', (req, res) => {
-//     // this will tell SQL that we want all koalas in the database and to sort by it's id number
-//     let queryText = 'SELECT * FROM "koalas" ORDER BY "id";';
-//     pool.query(queryText).then(result => {
-//     // sends back the results in an object
-//     res.send(result.rows);
-//     }).catch(error => {
-//         console.log('error getting koalas', error);
-//         res.sendStatus(500);
-//     });
-// });
+//! GET Request to the Database
+router.get('/', (req, res) => {
+    // this will tell SQL that we want all tasks in the database and to sort by it's id number
+    let queryText = 'SELECT * FROM "tasks" ORDER BY "id";';
+    pool.query(queryText).then(result => {
+    // sends back the results in an object
+    res.send(result.rows);
+    }).catch(error => {
+        console.log('error getting tasks from DB', error);
+        res.sendStatus(500);
+    });
+});
 
 // // POST
 // router.post('/', (req, res) => {

@@ -20,9 +20,11 @@
         [ ] Add task
         [ ] Page must refresh and show 
 
+    [ ] Pool.js setup
+
 
 [ ] Database
-    [ ] Set up SQL Database 
-    [ ] Create a Table
-    [ ] Information
+    [x] Set up SQL Database 
+    [x] Create a Table
+    [x] Information
     [ ] Create a SQL sheet

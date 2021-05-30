@@ -1,30 +1,25 @@
 
-// // const { Router } = require("express");
-
-// console.log( 'js' );
-
-// //#region ⬇⬇ All document setup below:
-// console.log( 'JavaScript is working.' );
-// $( document ).ready( function(){
-//   console.log( 'jQuery is working.' );
-//   // ⬇ Establish Click Listeners call:
-//   setupClickListeners()
-//   // ⬇ Load existing koalas on page load:
-//   getKoalas();
-// }); // End document ready function. 
-// //#end region ⬆⬆ All document setup above. 
+// #region ⬇⬇ All document setup below:
+console.log( 'JavaScript is working.' );
+$( document ).ready( function(){
+  console.log( 'jQuery is working.' );
+// ⬇ call Click Listener function:
+  setupClickListeners();
+// ⬇ Load existing tasks on page load:
+  //getTasks();
+}); // End document ready function. 
+//#end region ⬆⬆ All document setup above. 
 
 
-// //#region ⬇⬇ All functions below:
-// // ⬇ Click listener setup below:
-// function setupClickListeners() {
+//#region ⬇⬇ All functions below:
+// ⬇ Click listener setup below:
+function setupClickListeners() {
 //   $( '#addButton' ).on( 'click', addKoala)
-// } 
+} 
 
 // function addKoala(){
 //     console.log( 'In addButton on click' );
 //     // get user input and put in an object
-//     // NOT WORKING YET :(
 //     // using a test object
 //     let koalaToSend = {
 //       name: $('#nameIn').val(),

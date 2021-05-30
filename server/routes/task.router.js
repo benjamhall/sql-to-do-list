@@ -49,9 +49,9 @@ router.put('/:id', (req, res) => {
 
 // // DELETE
 
-itemsRouter.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     let deleteId = req.params.id;
-    console.log('removing id', idToDelete);
+    console.log('removing id', deleteId);
     let queryText = `DELETE FROM "tasks" WHERE "id" = $1;`;
     pool.query(queryText, [deleteId])
         .then((result) => {

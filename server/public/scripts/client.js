@@ -1,4 +1,3 @@
-const { default: swal } = require("sweetalert");
 
 // #region ⬇⬇ All document setup below:
 console.log('JavaScript is working.');
@@ -17,11 +16,11 @@ $( document ).ready( function(){
 function setupClickListeners() {
   $('#addButton').on('click', addTasks);
   $('.allTasks').on('click', '.checkBox', completedTask);
-  //$('.allTasks').on('click', '.removeBtn', removeItem);
+  $('.allTasks').on('click', '.removeBtn', removeItem);
 
 } 
 
-function addKoala(){
+function addTasks(){
     console.log( 'In addButton on click' );
     // get user input and put in an object
     // using a test object
@@ -58,7 +57,7 @@ function renderNow(taskArray) {
     newTask.data('id, item.id');
     newTask.append(`<button class="removeBtn>Remove</button>`);
     if (item.completed === false){
-      newItem.prepend(`<input type="checkbox" class="checkBox">`);
+      newTask.prepend(`<input type="checkbox" class="checkBox">`);
       $('#todoList').append(newTask);
     } else if (item.completed === true){
       newTask.prepend(`<input type="checkbox" checked="checked" class="checkBox">`);
@@ -109,7 +108,41 @@ function completedTask() {
     });
 }
 
+function removeItem() {
+  let idToRemove = $(this).closest('li').data('id');
+  let initTask = $(this).closest('li').text();
+  let taskToRemove = initTask.replace('Remove', '');
+  console.log('item is being removed', idToRemove);
+  swal({
+    title: "Do you want to remove this task?",
+    text: `${taskToRemove}`,
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        theRealDelete(idToRemove);
+        alert("Congrats on completing your list", {
+        });
+      } else {
+        alert("Keep working hard!");
+      }
+    });
+}
 
+function theRealDelete(idToDelete) {
+  $.ajax({
+    method: 'DELETE',
+    url: `/tasks/${idToDelete}`,
+  }).then((response) => {
+    console.log('task removed', response);
+    getTasks();
+  }).catch((error) => {
+    console.log(error);
+    alert('Unfortunately this item was not deleted, please try again.');
+  })
+}
 
 // #end region ⬆⬆ All functions above. 
 

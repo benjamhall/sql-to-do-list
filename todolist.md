@@ -1,9 +1,13 @@
 [ ] Basic Setup 
 
 
-[ ] HTML Set up
-    [ ] Input
-    [ ] Buttons
+[x] HTML Set up
+    [x] Input
+    [x] Buttons
+
+[ ] CSS 
+    background of 
+
 [ ] Server 
     [ ] Pool
     [ ] Router
@@ -13,6 +17,9 @@
 
     [ ] Client.js 
         [ ] Click Listeners
+        [ ] Add task
+        [ ] Page must refresh and show 
+
 
 [ ] Database
     [ ] Set up SQL Database 

@@ -17,60 +17,49 @@ router.get('/', (req, res) => {
     });
 });
 
-// // POST
-// router.post('/', (req, res) => {
-// // console log it to make sure it received from client
-//     console.log('req.body is ...', req.body);
+// POST
+router.post('/', (req, res) => {
+    let newToDo = req.body;
+    console.log('adding new to do item', newToDo);
+    let queryLine = `INSERT INTO "tasks" ( "item") VALUES($1);`
+    pool.query(queryLine, [newToDo.item])
+        .then((result) => {
+            console.log('item added to database', result);
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+})
 
-// // need to specify what we are sending to sql in sql terms and sanitize it
-//     let queryText = `INSERT INTO "koalas" ("name", "gender", "age", "ready_to_transfer", "notes") 
-//     VALUES ($1, $2, $3, $4, $5);`;
+// PUT
+router.put('/:id', (req, res) => {
+    let updateId = req.params.id;
+    console.log('updating id', updateId);
+    let queryText = `UPDATE "tasks" SET "completed" = NOT "completed" WHERE "id" = $1;`
+    pool.query(queryText, [updateId])
+        .then((result) => {
+            console.log('task was updated', result);
+            res.sendStatus(200);
+        }).catch((error) => {
+            console.log(error);
+        })
+})
 
-// // insert values from user object now that it has been sanitized
-//     let values = [req.body.name, req.body.gender, req.body.age, req.body.readyForTransfer, req.body.notes];
-
-// // send the information to the database
-// pool.query(queryText, values)
-//     .then( result => {
-//         console.log('Response from sql', result);
-//         res.sendStatus(201);
-//     }).catch( err => {
-//         console.log('The POST route server error is', err);
-//         res.sendStatus(500);
-//     });
-
-// });
-
-// // PUT
-
-// koalaRouter.put('/:id', (req, res) => {
-//     const koalaId = req.params.id;
-
-//     //Change the status of the koala to mark ready
-//     let koalaReady = req.body.koalaReady;
-
-//     let queryString = '';
-
-//     if (koalaReady === true) {
-//         queryString = `UPDATE "koalas" SET "ready_to_transfer" = NOT "ready_to_transfer" WHERE "koala".id = $1;`;
-//     } else {
-//         // If the koalaReady is somehow not what we expect, we reject the response and send
-//         // back a 500 error
-//         res.sendStatus(500);
-//         return; //early exit since it's an error!
-//     }
-//     pool.query(queryString, [koalaId])
-//         .then(response => {
-//             console.log(response.rowCount);
-//             res.sendStatus(202)
-//         })
-//         .catch(err => {
-//             console.log('This is frustrating', err);
-//             res.sendStatus(500);
-//         })
-
-// })
 
 // // DELETE
+
+itemsRouter.delete('/:id', (req, res) => {
+    let deleteId = req.params.id;
+    console.log('removing id', idToDelete);
+    let queryText = `DELETE FROM "tasks" WHERE "id" = $1;`;
+    pool.query(queryText, [deleteId])
+        .then((result) => {
+            console.log('task was deleted', result);
+            res.sendStatus(204);
+        }).catch((error) => {
+            console.log(error);
+        })
+})
 
 module.exports = router;

@@ -55,7 +55,7 @@ function renderNow(taskArray) {
   for (const item of taskArray) {
     let newTask = $(`<li class="taskToDo">${item.item}<li>`);
     newTask.data('id, item.id');
-    newTask.append(`<button class="removeBtn>Remove</button>`);
+    newTask.append(`<button class="removeBtn btn btn-danger">Remove</button>`);
     if (item.completed === false){
       newTask.prepend(`<input type="checkbox" class="checkBox">`);
       $('#todoList').append(newTask);
@@ -86,7 +86,7 @@ function getTasks(){
  
 // // }
 
-
+// ⬇ Function to complete task
 function completedTask() {
   let updateId = $(this).closest('li').data('id');
   console.log('completing task', updateId);
@@ -108,6 +108,7 @@ function completedTask() {
     });
 }
 
+// ⬇ Function to remove item from DOM
 function removeItem() {
   let idToRemove = $(this).closest('li').data('id');
   let initTask = $(this).closest('li').text();
@@ -116,22 +117,18 @@ function removeItem() {
   swal({
     title: "Do you want to remove this task?",
     text: `${taskToRemove}`,
-    icon: "warning",
-    buttons: true,
-    dangerMode: true,
   })
     .then((willDelete) => {
       if (willDelete) {
-        theRealDelete(idToRemove);
-        alert("Congrats on completing your list", {
-        });
+        fullyDelete(idToRemove);
       } else {
-        alert("Keep working hard!");
+        alert("Keep working hard");
       }
     });
 }
+// ⬇ Function to delete from Database
 
-function theRealDelete(idToDelete) {
+function fullyDelete(idToDelete) {
   $.ajax({
     method: 'DELETE',
     url: `/tasks/${idToDelete}`,
@@ -143,21 +140,3 @@ function theRealDelete(idToDelete) {
     alert('Unfortunately this item was not deleted, please try again.');
   })
 }
-
-// #end region ⬆⬆ All functions above. 
-
-  // $('#todoList').append(`<li>Tasks to Complete:</li>`)
-  // $('#tasksCompleted').append(`<li>Completed Tasks:</li>`)
-
-// // ⬇ Creating for loop to append with:
-// for (let i = 0; i < tasks.length; i++) {
-//   // ⬇ Declaring variable to hold each task on loop:
-//   let task = tasks[i];
-//   // ⬇ For each koala, append new row to table: 
-//   $('#todoList').append(`
-//       <tr>
-//         <td>${task.item}</td>
-//         <td>${task.completed}</td>
-//         <td><button class="readyButtons" data-id="${task.id}">Completed</button></td>
-//         <td><button class="removeButtons" data-id="${task.id}">Remove</button></td>
-//       </tr>

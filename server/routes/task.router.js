@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
     pool.query(queryText).then(result => {
     // sends back the results in an object
     res.send(result.rows);
+    console.log(result.rows);
     }).catch(error => {
         console.log('error getting tasks from DB', error);
         res.sendStatus(500);

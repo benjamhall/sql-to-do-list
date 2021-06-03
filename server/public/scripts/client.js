@@ -47,14 +47,17 @@ function addTasks(){
 // ⬇ Function to render page below: 
 function renderNow(taskArray) {
   console.log('In readyNow');
+  console.log(taskArray);
+  
   // ⬇ Emptying out the DOM table to load to:
   $('#todoList').empty();
   $('#tasksCompleted').empty();
 
   // ⬇ Creating for loop to append to DOM:
   for (const item of taskArray) {
-    let newTask = $(`<li class="taskToDo">${item.item}<li>`);
-    newTask.data('id, item.id');
+    console.log(item);
+    let newTask = $(`<li class="taskToDo">${item.item}</li>`);
+    newTask.data('id', item.id);
     newTask.append(`<button class="removeBtn btn btn-danger">Remove</button>`);
     if (item.completed === false){
       newTask.prepend(`<input type="checkbox" class="checkBox">`);

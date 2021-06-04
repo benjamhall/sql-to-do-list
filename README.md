@@ -4,7 +4,6 @@
 
 This application allows you to create tasks, mark them as complete and remove them from your list as needed all while safely storing your task data in the cloud to be ready for you whenever you need it.
 
-
 ## Installation
 Create a database named your weekend-to-do-app,
 The queries in the database.sql file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on Postgres, so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries,
